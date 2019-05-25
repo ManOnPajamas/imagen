@@ -1,13 +1,13 @@
 <?php
-require_once 'producto.entidad.php';
-require_once 'producto.model.php';
+require_once 'pintor.entidad.php';
+require_once 'pintor.model.php';
 require_once 'funciones.php';
 
 // Logica
 //error_reporting(E_ALL ^ E_NOTICE);
 
-$pro = new producto();
-$modelo = new ProductoModel();
+$pro = new pintor();
+$modelo = new pintorModel();
 
 if(isset($_REQUEST['action']))
 {
@@ -15,28 +15,32 @@ if(isset($_REQUEST['action']))
 	{
 		case 'actualizar':
 			$pro->__SET('id',              $_REQUEST['id']);
-			$pro->__SET('Descripcion',        $_REQUEST['Descripcion']);
-			$pro->__SET('Precio',          $_REQUEST['Precio']);
-			$pro->__SET('Stock',            $_REQUEST['Stock']);
+			$pro->__SET('nombre',        $_REQUEST['nombre']);
+			$pro->__SET('ciudad',          $_REQUEST['ciudad']);
+			$pro->__SET('pais',            $_REQUEST['pais']);
+			$pro->__SET('nacimiento',            $_REQUEST['nacimiento']);
+			$pro->__SET('muerte',            $_REQUEST['muerte']);
 			$pro->__SET('Imagen',            $_REQUEST['n_img']);
 
 			$modelo->Actualizar($pro);
-			header('Location: producto.php');
+			header('Location: pintor.php');
 			break;
 
 		case 'registrar':
-			$pro->__SET('Descripcion',        $_REQUEST['Descripcion']);
-			$pro->__SET('Precio',          $_REQUEST['Precio']);
-			$pro->__SET('Stock',            $_REQUEST['Stock']);
+			$pro->__SET('nombre',        $_REQUEST['nombre']);
+			$pro->__SET('ciudad',          $_REQUEST['ciudad']);
+			$pro->__SET('pais',            $_REQUEST['pais']);
+			$pro->__SET('nacimiento',            $_REQUEST['nacimiento']);
+			$pro->__SET('muerte',            $_REQUEST['muerte']);
 			$pro->__SET('Imagen',            $_REQUEST['n_img']);
             $modelo->Registrar($pro);
             subir_fichero('dir','campofotografia');
-			header('Location: producto.php');
+			header('Location: pintor.php');
 			break;
 
 		case 'eliminar':
 			$modelo->Eliminar($_REQUEST['id']);
-			header('Location: producto.php');
+			header('Location: pintor.php');
 			break;
 
 		case 'editar':
@@ -63,16 +67,24 @@ if(isset($_REQUEST['action']))
               					
                     <table style="width:500px;">
                         <tr>
-                            <th style="text-align:left;">Descripcion</th>
-                            <td><input type="text" name="Descripcion" value="<?php echo $pro->__GET('Descripcion'); ?>" style="width:100%;" /></td>
+                            <th style="text-align:left;">nombre</th>
+                            <td><input type="text" name="nombre" value="<?php echo $pro->__GET('nombre'); ?>" style="width:100%;" /></td>
                         </tr>
                         <tr>
-                            <th style="text-align:left;">Precio</th>
-                            <td><input type="text" name="Precio" value="<?php echo $pro->__GET('Precio'); ?>" style="width:100%;" /></td>
+                            <th style="text-align:left;">ciudad</th>
+                            <td><input type="text" name="ciudad" value="<?php echo $pro->__GET('ciudad'); ?>" style="width:100%;" /></td>
                         </tr>
                         <tr>
-                            <th style="text-align:left;">Stock</th>
-                            <td><input type="text" name="Stock" value="<?php echo $pro->__GET('Stock'); ?>" style="width:100%;" /></td>
+                            <th style="text-align:left;">pais</th>
+                            <td><input type="text" name="pais" value="<?php echo $pro->__GET('pais'); ?>" style="width:100%;" /></td>
+                        </tr>
+						 <tr>
+                            <th style="text-align:left;">nacimiento</th>
+                            <td><input type="text" name="pais" value="<?php echo $pro->__GET('pais'); ?>" style="width:100%;" /></td>
+                        </tr>
+						 <tr>
+                            <th style="text-align:left;">muerte</th>
+                            <td><input type="text" name="pais" value="<?php echo $pro->__GET('pais'); ?>" style="width:100%;" /></td>
                         </tr>
                         <tr>
                                 <th style="text-align:left;">Imagen</th>
@@ -94,9 +106,11 @@ if(isset($_REQUEST['action']))
                 <table class="pure-table pure-table-horizontal">
                     <thead>
                         <tr>
-                            <th style="text-align:left;">Descripcion</th>
-                            <th style="text-align:left;">Precio</th>
-                            <th style="text-align:left;">Stock</th>
+                            <th style="text-align:left;">nombre</th>
+                            <th style="text-align:left;">ciudad</th>
+                            <th style="text-align:left;">pais</th>
+							<th style="text-align:left;">nacimiento</th>
+							<th style="text-align:left;">muerte</th>
 							<th style="text-align:left;">Imagen</th>
                             <th></th>
                             <th></th>
@@ -104,9 +118,11 @@ if(isset($_REQUEST['action']))
                     </thead>
                     <?php foreach($modelo->Listar() as $r): ?>
                         <tr>
-							<td><?php echo $r->__GET('Descripcion'); ?></td>
-                            <td><?php echo $r->__GET('Precio'); ?></td>
-                            <td><?php echo $r->__GET('Stock'); ?></td>
+							<td><?php echo $r->__GET('nombre'); ?></td>
+                            <td><?php echo $r->__GET('ciudad'); ?></td>
+                            <td><?php echo $r->__GET('pais'); ?></td>
+							<td><?php echo $r->__GET('nacimiento'); ?></td>
+							<td><?php echo $r->__GET('muerte'); ?></td>
 							<td><img src="dir/<?php echo $r->__GET('Imagen'); ?>" alt="<?php echo $r->__GET('Imagen'); ?>"></td>
                             <td>
                                 <a href="?action=editar&id=<?php echo $r->id; ?>">Editar</a>
