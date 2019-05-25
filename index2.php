@@ -25,7 +25,10 @@
 <div>
     <a href="producto.php">Productos</a>
 </div>
-         
+
+<div>
+    <a href="pintor.php">Pintor</a>
+</div>         
 
     </body>
 </html>
