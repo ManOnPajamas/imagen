@@ -7,7 +7,7 @@ class ProductoModel
 	{
 		try
 		{
-			$this->pdo = new PDO('mysql:host=localhost:3306;dbname=acad', 'root', '');
+			$this->pdo = new PDO('mysql:host=localhost:3306;dbname=acad', 'phpmyadmin', 'root');
 			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		        
 		}
 		catch(Exception $e)
@@ -16,7 +16,7 @@ class ProductoModel
 		}
 	}
 
-public function Listar()
+	public function Listar()
 	{
 		try
 		{
@@ -91,10 +91,10 @@ public function Listar()
 		try 
 		{
 			$sql = "UPDATE productos SET 
-						Descripcion          = ?, 
+						Descripcion   = ?, 
 						Precio        = ?,
-						Stock            = ? ,
-						Imagen			= ?
+						Stock         = ?,
+						Imagen		  = ?
 				    WHERE id = ?";
 
 			$this->pdo->prepare($sql)
